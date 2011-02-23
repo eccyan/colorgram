@@ -2,23 +2,51 @@
 
 html { font-family: sans-serif; background-color: #FFF; }
 body { color: #FFF; line-height: 1.63; }
-img { padding: 0.25em; background-color: #0a0a0a }
+img { vertical-align: top; }
 a { color: #3C3; }
-p { text-align: center; padding: 0; }
-hr { }
 
 /** FONT SIZE */
 body { font-size: 62.5%; /* IE */}
 html>/**/body { font-size: 10px; /* Except IE */ }
 
-.wrapper{ margin: 0 auto; width: 468px; font-size: 140%; border-radius:1em; background-color: #0a0a0a; }
-.connect { margin:0em 1em 0em 1em; }
-.connect button { color:#FFF; background-color:#64AAEF; border-radius:0.5em; height:2.5em; }
-.follow { float:left; margin:1em 1em 1em 1em; }
-.like { clear:both; margin:1em 1em 1em 1em; background-color:#6b6b6b; border-radius:0.5em; }
+body.ja	{ font-family:'ヒラギノ角ゴ Pro W3','Hiragino Kaku Gothic Pro','メイリオ',Meiryo,'ＭＳ Ｐゴシック',sans-serif; }
+body.en	{ font-family: helvetica, arial, sans-serif; }
 
-footer { padding: 0 2em;  text-align: left; margin: 0 auto; width: 400px; font-size: 80%; }
+header { color:#FFF; position: relative; padding: 40px 0 20px; margin: 0 auto 20px; width: 850px; font-size: 140%; }
+header h1 { margin-bottom: 10px; font-weight: normal; }
+header h1 img { margin-right: 10px; vertical-align: middle; }
 
-.clearfix:after	{ content:"."; display: block; height:0px; clear:both; line-height:0; visibility:hidden; }
-.clearfix{ zoom:1; }
+header a { text-decoration: none; color: #000; }
+header nav ul { padding: 10px; background: #000; font-size: 80%; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
+header nav ul a { color: #FFF; }
+header nav li { display: inline; margin-right: 20px; }
+header .addthis_toolbox { position: absolute; top: 120px; right: 10px; left: auto; }
 
+.wrapper { margin: 0 auto; width: 850px; font-size: 140%; }
+article { float: left; width: 630px; background-color:#000; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
+aside { float: right; width: 200px; background-color:#000; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
+
+footer { padding: 20px 0; margin: 0 auto; width: 850px; font-size: 140%; }
+
+article header { padding: 0; }
+article h1 { margin-bottom: 20px; font-size: 200%; }
+article h1 img { vertical-align: middle; }
+article h2 { font-size: 150%; }
+
+article p { margin-bottom: 1.63em; }
+
+.loading { display: none; padding-left: 21px; background: url(/img/ajax-loader.gif) left center no-repeat; }
+
+.clearfix:after { content:"."; display: block; height:0px; clear:both; line-height:0; visibility:hidden; }
+.clearfix { zoom:1; }
+
+/** ADVERTISING */
+aside section { margin-bottom: 20px; }
+
+.ad { margin: 20px 0; }
+.badge { background: #FFF; }
+
+/** DOCUMENTS */
+.doc { margin-top: 20px; }
+.doc ol { margin-left: 2em; }
+.anchor { margin-left: 2em; }
