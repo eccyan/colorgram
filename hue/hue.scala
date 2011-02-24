@@ -38,7 +38,7 @@ object Server {
 
     val serverSocket = new ServerSocket(12111)
 
-    def main(arg: Array[String]) = {
+    def main(arg: Array[String]) {
 	while(true) {
 	    println("about to block")
 	    val socket = serverSocket.accept()
