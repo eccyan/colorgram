@@ -33,7 +33,7 @@ object Averager extends Actor {
     }
 }
 
-object EchoServer {
+object Server {
     Averager.start
 
     val serverSocket = new ServerSocket(12111)
@@ -48,4 +48,4 @@ object EchoServer {
     }
 }
 
-EchoServer.start
+Server.start
