@@ -1,3 +1,4 @@
+import java.lang._
 import java.net._
 import java.io._
 
@@ -15,8 +16,8 @@ object Averager extends Actor {
 
     def average(in: BufferedReader, out: PrintWriter) {
 	val line = in readLine
-	val numbers = line.split("[,\n]") filter ( number => number.matches("[0-9]*") )  map (number => Integer.parseInt(number) )
-	out.println( (0 /: numbers){ _ + _ }.asInstanceOf[Float] / numbers.length)
+	val numbers = line.split("[,\n]") filter ( number => number.matches("[-+]?[0-9]+[.]?[0-9]*") )  map (number => Double.parseDouble(number) )
+	out.println( (0.0 /: numbers){ _ + _ } / numbers.length)
 	out.flush
     }
 
