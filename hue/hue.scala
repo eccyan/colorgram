@@ -1,6 +1,5 @@
 import java.net._
 import java.io._
-import java.awt.Color
 import javax.imageio._
 
 import scala.actors._
