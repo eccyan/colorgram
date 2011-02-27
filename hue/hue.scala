@@ -26,8 +26,10 @@ object HueGetter extends Actor {
 	val avgR = (0 /: r) { _ + _ } / count
 	val avgG = (0 /: g) { _ + _ } / count
 	val avgB = (0 /: b) { _ + _ } / count
+	
+	val hue = Math.atan( Math.sqrt(3)*(avgG-avgB) / (2*avgR - avgG - avgB) )
 
-	out.println( (avgR << 0x10) | (avgG << 0x08) | (avgB << 0x00) )
+	out.println(hue)
 	out.flush
     }
 
