@@ -1,5 +1,8 @@
 import java.net._
 import java.io._
+import java.awt.Color
+import java.awt.Image
+import java.awt.image.BufferedImage
 import javax.imageio._
 
 import scala.actors._
@@ -7,6 +10,9 @@ import scala.actors.Actor._
 
 import org.jsoup._
 
+/**
+ * Class for Instagram parmanent link ID 
+ */
 class PID(initPID: String) {
     require( !(initPID isEmpty) )
 
@@ -45,19 +51,25 @@ class PID(initPID: String) {
     override def toString(): String = pid
 }
 
+/**
+ * Object from PID class
+ */
 object PID {
     implicit def stringToPID(s: String) = new PID(s) 
 }
 
+/**
+ * Class for parser instagram page
+ */
 class InstagramParser(url: URL, timeout: Int) {
-    // get document from URL
+    // Get document from URL
     private val document = { 
-	// only for instagr.am
+	// Only for instagr.am
     	if (url.getHost != "instagr.am") throw new IllegalArgumentException("host name is not instagr.am"); 
     	Jsoup parse(url, timeout)
     }
 
-    // get ID from profile photo url with regex 
+    // Get ID from profile photo url with regex 
     def getID() = {
 	val src = document select(".profile-photo") attr("src") 
 	val tmp = """profile_[0-9]+""".r.findFirstIn(src)
@@ -65,8 +77,31 @@ class InstagramParser(url: URL, timeout: Int) {
 	//"""\..+$""".r replaceAllIn("""[0-9]+\..+$""".r.findFirstIn(src) get, "")
     }
     def getPhotoURL() = {
-    	document select(".photo") attr("src")
+    	new URL( document select(".photo") attr("src") )
     }
+}
+
+/**
+ * Class for color attributes
+ */
+class ColorAttribute(image:Image) {
+    // Get HSB array of avarage photo
+    private val hsb = {
+    	// Scale down image is avarage color for photo
+    	val scaled = image getScaledInstance(1, 1, Image.SCALE_AREA_AVERAGING)
+
+	// Create buffer, and draw scaled image
+	val buffer = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB) 
+	buffer createGraphics() drawImage(scaled, 0, 0, Color.BLACK, null)
+
+	// Get avrage color from buffer
+    	val avarage = new Color( buffer getRGB(0, 0) )
+	Color RGBtoHSB(avarage getRed, avarage getGreen, avarage getBlue, null)
+    }
+
+    def getHue() = hsb(0)
+    def getSaturation() = hsb(1);
+    def getBrightness() = hsb(2);
 }
 
 object Crowler {
@@ -78,16 +113,17 @@ object Crowler {
 	    val url = new URL("http://instagr.am/p/" + (pid++) + "/")
 	    try {
 		val parser = new InstagramParser(url, 1000);
+		val attribute = new ColorAttribute( ImageIO read(parser getPhotoURL) )
 
-		println(url toString)
-		println(parser getID)
-		println(parser getPhotoURL)
+		print(url)
+		print(", "+ (attribute getHue) )
+		print(", "+ (attribute getSaturation) )
+		print(", "+ (attribute getBrightness) )
+		println()
 	    }
 	    catch {
 	    	case e: IOException => println("could not connect url.")
 	    }
-
-	    Thread.sleep(1000)
 	}
 
 	println("end crowler")
