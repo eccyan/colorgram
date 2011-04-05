@@ -1,9 +1,8 @@
-import java.net._
-import java.io._
-import java.awt.Color
-import java.awt.Image
+import java.io.IOException
+import java.net.URL
+import java.awt.{ Color, Image }
 import java.awt.image.BufferedImage
-import javax.imageio._
+import javax.imageio.ImageIO
 
 import scala.actors._
 import scala.actors.Actor._
@@ -26,16 +25,16 @@ class PID(initPID: String) {
 
     private def carry(pid: String): String = {
     	def loop(pid:String, carried: Boolean, result:String): String = {
-	    // if pid is empty then quit loop
+	    // If pid is empty then quit loop
 	    if (pid.isEmpty) return characters(0) + result
-	    // if not carried then quit loop
+	    // If not carried then quit loop
 	    if (!carried) return pid + result
 
 	    val reversed = pid reverse
 	    val index = characters indexOf( reversed head )
-	    // get character on carry up
+	    // Get character on carry up
 	    val c = if (index + 1 < characters.size) characters(index+1) else characters(0)
-	    // update character 
+	    // Update character 
 	    val updated = reversed updated(0, c)
 
 	    loop(updated drop(1) reverse, ( reversed.head == characters.last ), updated.take(1) + result)
@@ -130,4 +129,4 @@ object Crowler {
     }
 }
 
-//Crowler.main(Array(""))
+Crowler.main(Array(""))
