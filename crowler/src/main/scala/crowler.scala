@@ -1,3 +1,5 @@
+package eccyan.colorgram.crowler
+
 import java.io.IOException
 import java.net.URL
 import java.awt.{ Color, Image }
@@ -103,6 +105,9 @@ class ColorAttribute(image:Image) {
     def getBrightness() = hsb(2);
 }
 
+/**
+ * Main
+ */
 object Crowler {
     def main(args : Array[String]) = {
 	println("start crowler")
@@ -129,4 +134,4 @@ object Crowler {
     }
 }
 
-Crowler.main(Array(""))
+//Colorgrammer.main(Array(""))
