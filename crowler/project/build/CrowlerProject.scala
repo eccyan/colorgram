@@ -1,6 +1,7 @@
 import sbt._
 
-class CrowlerProject(info: ProjectInfo) extends DefaultProject(info) {
+class CrowlerProject(info: ProjectInfo) extends DefaultProject(info)
+    with AssemblyProject {
     import BasicScalaProject._
 
     // Repositories
@@ -8,6 +9,9 @@ class CrowlerProject(info: ProjectInfo) extends DefaultProject(info) {
 
     // Dependent jar files
     val mysqlConnectorJava = "mysql" % "mysql-connector-java" % "5.1.16"
-    val squeryl = "org.squeryl" % "squeryl_2.8.1" % "0.9.4-RC6"
-    val orgJsoup = "org.jsoup" % "jsoup" % "1.5.2"
+    val squeryl            = "org.squeryl" % "squeryl_2.8.1" % "0.9.4-RC6"
+    val orgJsoup           = "org.jsoup" % "jsoup" % "1.5.2"
+
+    // for create jar
+    override def mainClass = Some("colorgram.crowler.Crowler")
 }
