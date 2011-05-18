@@ -5,7 +5,7 @@ import java.net.URL
 import org.jsoup._
 
 /**
- * Class for parser instagram page
+ * Class for parsing instagram page
  */
 class InstagramParser(url: URL, timeout: Int) {
     // Get document from URL
@@ -17,10 +17,9 @@ class InstagramParser(url: URL, timeout: Int) {
 
     // Get ID from profile photo url with regex 
     def getID() = {
-	val src = document select(".profile-photo") attr("src") 
-	val tmp = """profile_[0-9]+""".r.findFirstIn(src)
-	if (tmp != None) """profile_""".r replaceAllIn(tmp get, "") else ""
-	//"""\..+$""".r replaceAllIn("""[0-9]+\..+$""".r.findFirstIn(src) get, "")
+        val src = document select(".profile-photo") attr("src") 
+        val tmp = """profile_[0-9]+""".r.findFirstIn(src)
+        if (tmp != None) """profile_""".r replaceAllIn(tmp get, "") else ""
     }
     def getPhotoURL() = {
     	new URL( document select(".photo") attr("src") )

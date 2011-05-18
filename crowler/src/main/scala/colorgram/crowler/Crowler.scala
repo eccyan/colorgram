@@ -8,31 +8,30 @@ import scala.actors.Actor._
 import graphics._
 import parser._
 
+case class Start(pid: PID)
+
 /**
- * Main
+ * Crowler
  */
-object Crowler {
-    def main(args: Array[String]) = {
-        println("start crowler")
+class Crowler extends Actor {
+    def act() = {
+        receive {
+            case Start(pid) => {
+                val url = new URL("http://instagr.am/p/" + pid + "/")
+                try {
+                    val parser = new InstagramParser(url, 1000);
+                    val attribute = new ColorAttribute( ImageIO read(parser getPhotoURL) )
 
-        val pid: PID = "0"
-        while (true) {
-            val url = new URL("http://instagr.am/p/" + (pid++) + "/")
-            try {
-            val parser = new InstagramParser(url, 1000);
-            val attribute = new ColorAttribute( ImageIO read(parser getPhotoURL) )
-
-            print(url)
-            print(", "+ (attribute getHue) )
-            print(", "+ (attribute getSaturation) )
-            print(", "+ (attribute getBrightness) )
-            println()
-            }
-            catch {
-                case e: IOException => println("could not connect url.")
+                    print(url)
+                    print(" "+ (attribute getHue) )
+                    print(", "+ (attribute getSaturation) )
+                    print(", "+ (attribute getBrightness) )
+                    println()
+                }
+                catch {
+                    case e: IOException => println(url + " could not connect")
+                }
             }
         }
-
-        println("end crowler")
     }
 }
