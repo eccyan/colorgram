@@ -6,7 +6,7 @@ import javax.imageio.ImageIO
 import scala.actors._
 import scala.actors.Actor._
 import instagram._
-import graphics._
+import image._
 
 case class Start(pid: ParmanentID)
 
@@ -23,9 +23,9 @@ class Crowler extends Actor {
                     val attribute = new ColorAttribute( ImageIO read(parser getPhotoURL) )
 
                     print(url)
-                    print(" "+ (attribute getHue) )
-                    print(", "+ (attribute getSaturation) )
-                    print(", "+ (attribute getBrightness) )
+                    print(" " + (attribute getHue) )
+                    print(", " + (attribute getSaturation) )
+                    print(", " + (attribute getBrightness) )
                     println()
                 }
                 catch {
