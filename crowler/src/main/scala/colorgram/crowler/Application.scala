@@ -1,13 +1,15 @@
 package colorgram.crowler
 
+import instagram._
+
 /**
- * Execute Crowl
+ * Application
  */
-object Executer {
+object Application {
     def main(args: Array[String]) = {
         println("start crowler")
 
-        val pid: PID = "0"
+        val pid: ParmanentID = "0"
         while (true) {
             val crowler = new Crowler
             crowler.start

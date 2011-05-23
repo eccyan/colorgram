@@ -5,10 +5,10 @@ import java.net.URL
 import javax.imageio.ImageIO
 import scala.actors._
 import scala.actors.Actor._
+import instagram._
 import graphics._
-import parser._
 
-case class Start(pid: PID)
+case class Start(pid: ParmanentID)
 
 /**
  * Crowler
@@ -19,7 +19,7 @@ class Crowler extends Actor {
             case Start(pid) => {
                 val url = new URL("http://instagr.am/p/" + pid + "/")
                 try {
-                    val parser = new InstagramParser(url, 1000);
+                    val parser = new Parser(url, 1000);
                     val attribute = new ColorAttribute( ImageIO read(parser getPhotoURL) )
 
                     print(url)

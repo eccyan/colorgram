@@ -1,4 +1,4 @@
-package colorgram.crowler.parser
+package colorgram.crowler.instagram
 
 import java.io.IOException
 import java.net.URL
@@ -7,7 +7,7 @@ import org.jsoup._
 /**
  * Class for parsing instagram page
  */
-class InstagramParser(url: URL, timeout: Int) {
+class Parser(url: URL, timeout: Int) {
     // Get document from URL
     private val document = { 
 	// Only for instagr.am
