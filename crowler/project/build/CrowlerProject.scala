@@ -13,5 +13,5 @@ class CrowlerProject(info: ProjectInfo) extends DefaultProject(info)
     val orgJsoup           = "org.jsoup" % "jsoup" % "1.5.2"
 
     // for create jar
-    override def mainClass = Some("colorgram.crowler.Crowler")
+    override def mainClass = Some("colorgram.crowler.Executer")
 }
